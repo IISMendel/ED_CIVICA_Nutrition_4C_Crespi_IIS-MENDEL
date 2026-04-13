@@ -97,7 +97,7 @@ li{margin-bottom:5px}
   animation:fadeUp .8s .25s ease both;
 }
 .hero-sub{
-  font-size:1.1rem;color:rgba(255,255,255,.65);max-width:660px;margin:20px auto 44px;
+  font-size:1.1rem;color:rgba(255,255,255,.65);max-width:660px;margin:20px auto 30px;
   font-weight:300;z-index:1;animation:fadeUp .8s .3s ease both;
 }
 .hero-badges{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;z-index:1;animation:fadeUp .8s .45s ease both}
@@ -122,10 +122,10 @@ li{margin-bottom:5px}
 ══════════════════════════════════════════════════ */
 .audio-container {
   background: rgba(11, 18, 32, 0.8); border: 1px solid var(--border);
-  border-radius: 50px; padding: 0.5rem 1.5rem; display: inline-flex; align-items: center; gap: 1rem;
+  border-radius: 20px; padding: 15px 25px; display: flex; flex-direction: column; align-items: center; gap: 8px;
   margin-bottom: 30px; box-shadow: var(--shadow); z-index: 1; animation: fadeUp .8s .35s ease both;
 }
-.audio-container p { margin: 0; font-size: 0.9rem; font-weight: 600; color: var(--gold); }
+.audio-container p { margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--gold); }
 audio::-webkit-media-controls-panel { background-color: var(--bg3); }
 audio::-webkit-media-controls-current-time-display, audio::-webkit-media-controls-time-remaining-display { color: #fff; }
 
@@ -442,24 +442,31 @@ footer .footer-leaf{color:var(--gold);font-size:1.2rem;margin:0 6px}
   <p class="hero-italian">Nutrizione e Società — <em>Dal campo alla salute globale</em></p>
   <p class="hero-sub">The Farm-to-Health Blueprint: understanding human nutrition, agricultural sources, and how food connects to the UN Agenda 2030 Sustainable Development Goals.</p>
   
-  <!-- AUDIO LESSON INTEGRATION -->
-  <div class="audio-container" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 15px 25px;">
+  <!-- AUDIO LESSON INTEGRATION (Fix: incolonnato e non esplode graficamente) -->
+  <div class="audio-container">
     <p><i class="fas fa-headphones-alt"></i> Audio Lesson: Nutrition Policy is Written in Dirt</p>
-    <audio controls style="width: 100%; min-width: 280px;">
-      <source src="./Nutrition_policy_is_written_in_dirt.m4a" type="audio/mp4">
-      <source src="./Nutrition_policy_is_written_in_dirt.m4a" type="audio/x-m4a">
+    <audio controls style="width: 100%; min-width: 260px; max-width: 400px; height: 40px; border-radius: 20px;">
+      <source src="Nutrition_policy_is_written_in_dirt.m4a" type="audio/mp4">
+      <source src="Nutrition_policy_is_written_in_dirt.m4a" type="audio/x-m4a">
       Il tuo browser non supporta l'audio.
     </audio>
-    <a href="./Nutrition_policy_is_written_in_dirt.m4a" download target="_blank" style="font-size: 0.75rem; color: var(--text-muted);"><i class="fas fa-download"></i> Clicca qui per scaricare il file audio</a>
+    <a href="Nutrition_policy_is_written_in_dirt.m4a" download="Nutrition_policy_is_written_in_dirt.m4a" target="_blank" style="font-size: 0.8rem; color: var(--gold-light); text-decoration: underline; margin-top: 4px;">
+      <i class="fas fa-download"></i> Clicca qui per scaricare il file audio
+    </a>
   </div>
 
   <div class="hero-badges">
-    <button class="badge" onclick="switchTab('nutrition')"><i class="fas fa-apple-whole"></i> Nutrition Science</button>
+    <button class="badge active" onclick="switchTab('nutrition')"><i class="fas fa-apple-whole"></i> Nutrition Science</button>
     <button class="badge" onclick="switchTab('sdg')"><i class="fas fa-globe"></i> Agenda 2030 & SDGs</button>
     <button class="badge" onclick="switchTab('padlet')"><i class="fas fa-layer-group"></i> Padlet Guide</button>
     <button class="badge" onclick="switchTab('phrases')"><i class="fas fa-comments"></i> Oral Phrases</button>
-    <a href="./Farm_to_Health_Blueprint.pdf" download target="_blank" class="badge" style="border-color: var(--coral); color: var(--coral); background: rgba(255,107,107,.1);"><i class="fas fa-file-pdf"></i> PDF Blueprint</a>
+    
+    <!-- PDF LINK (Fix: aggiunto tag "a" per evitare di rompere il JavaScript delle schede) -->
+    <a href="Farm_to_Health_Blueprint.pdf" download="Farm_to_Health_Blueprint.pdf" target="_blank" class="badge" style="border-color: var(--coral); color: var(--coral); background: rgba(255,107,107,.1);">
+      <i class="fas fa-file-pdf"></i> PDF Blueprint
+    </a>
   </div>
+  
   <div class="hero-scroll">
     <i class="fas fa-chevron-down"></i>
     <span>Scroll</span>
@@ -504,6 +511,7 @@ footer .footer-leaf{color:var(--gold);font-size:1.2rem;margin:0 6px}
   <p class="section-subtitle">Cosa si intende per nutrizione?</p>
   <div class="section-divider"></div>
 
+  <!-- FIX: Griglia sistemata e chiusa perfettamente -->
   <div class="grid-2" style="margin-bottom:40px">
     <div>
       <p style="margin-bottom:16px">Nutrition is the series of processes by which your body takes in and uses nutrients for <strong style="color:var(--gold)">survival and growth</strong>. It is the study of how the body processes food to sustain life and prevent <em>malnutrition</em> — which can mean eating too little <strong>or</strong> too much of the wrong things.</p>
@@ -512,28 +520,32 @@ footer .footer-leaf{color:var(--gold);font-size:1.2rem;margin:0 6px}
       </div>
       <p style="color:var(--text-muted);font-size:.9rem;margin-top:16px"><strong style="color:var(--text)">The Nutrient Cycle</strong> connects three levels: Plants generate carbohydrates via photosynthesis → Animals consume plants to build proteins and fats → Humans depend entirely on plant and animal agricultural outputs for survival and growth.</p>
     </div>
+    
     <div>
       <div class="big-quote">
         "Understanding nutrition transforms eating from a biological necessity into an act of civic responsibility."
-          <div class="callout green">
-            <strong>Agricultural Connection:</strong> Every nutrient in your body originates from either a plant or an animal raised in agriculture. The health of the soil directly determines the nutritional quality of the food.
-          </div>
-          <!-- IMMAGINE UNNAMED (INFOGRAFICA) -->
-          <img src="./unnamed.jpg" onerror="this.src='./unnamed.png'" alt="Infografica Ciclo dei Nutrienti" style="width:100%; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 24px; border: 1px solid var(--border);">
-        </div>
+        <cite>— Farm-to-Health Blueprint, IIS Mendel 2026</cite>
       </div>
+      <div class="callout green">
+        <strong>Agricultural Connection:</strong> Every nutrient in your body originates from either a plant or an animal raised in agriculture. The health of the soil directly determines the nutritional quality of the food.
+      </div>
+      <!-- IMMAGINE UNNAMED (INFOGRAFICA) -->
+      <img src="unnamed.jpg" onerror="this.src='unnamed.png'" alt="Infografica Ciclo dei Nutrienti" style="width:100%; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 24px; border: 1px solid var(--border);">
+    </div>
+  </div>
 
   <!-- VIDEO INTEGRATION -->
   <h2 class="section-title" style="margin-bottom:8px">Watch &amp; Learn</h2>
   <p class="section-subtitle" style="margin-bottom:20px">Il legame tra suolo, agricoltura e salute pubblica</p>
   
   <div class="grid-2" style="margin-bottom:48px">
-    <!-- Video Locale -->
+    <!-- Video Locale (Riparato percorso con spazi) -->
     <div>
       <h3 style="color:var(--gold);margin-bottom:12px;font-size:1.1rem"><i class="fas fa-play-circle"></i> The Civic Plate</h3>
       <div class="video-wrap" style="background: #000;">
         <video controls style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;">
-          <source src="./The%20Civic%20Plate.mp4" type="video/mp4">
+          <source src="The%20Civic%20Plate.mp4" type="video/mp4">
+          <source src="The_Civic_Plate.mp4" type="video/mp4">
           Il tuo browser non supporta il tag video.
         </video>
       </div>
@@ -1484,6 +1496,7 @@ footer .footer-leaf{color:var(--gold);font-size:1.2rem;margin:0 6px}
 <!-- ══════════════ JAVASCRIPT ══════════════ -->
 <script>
 function switchTab(tabName) {
+  if(!tabName) return; // Evita crash di sicurezza
   // Hide all tab content
   document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
@@ -1494,10 +1507,12 @@ function switchTab(tabName) {
   document.querySelector('nav').scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-// Hero badge clicks
-document.querySelectorAll('.hero-badges .badge').forEach((btn, i) => {
+// Hero badge clicks - FIX: usa SOLO i button, ignora i link <a> come il PDF
+document.querySelectorAll('.hero-badges button.badge').forEach((btn, i) => {
   const tabs = ['nutrition','sdg','padlet','phrases'];
-  btn.addEventListener('click', () => switchTab(tabs[i]));
+  if(tabs[i]) {
+    btn.addEventListener('click', () => switchTab(tabs[i]));
+  }
 });
 
 // Intersection Observer for fade-in cards
