@@ -431,6 +431,49 @@ footer .footer-leaf{color:var(--gold);font-size:1.2rem;margin:0 6px}
   .stat-item{min-width:130px}
   .tab-btn{font-size:.78rem;padding:14px 12px}
 }
+
+/* ══════════════════════════════════════════════════
+   LIGHTBOX & DOWNLOAD (Infografica)
+══════════════════════════════════════════════════ */
+.lightbox {
+  display: none; position: fixed; z-index: 9999;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(6, 11, 22, 0.92); backdrop-filter: blur(5px);
+  align-items: center; justify-content: center; padding: 20px;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.lightbox.active { display: flex; opacity: 1; }
+.lightbox img {
+  max-width: 95%; max-height: 90vh; border-radius: var(--radius);
+  box-shadow: 0 0 50px rgba(0, 212, 177, 0.2); border: 1px solid var(--border);
+}
+.lightbox-close {
+  position: absolute; top: 20px; right: 30px; color: #fff;
+  font-size: 2.5rem; cursor: pointer; transition: color 0.3s;
+}
+.lightbox-close:hover { color: var(--coral); }
+.img-container {
+  position: relative; cursor: pointer; margin-top: 24px; border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+}
+.img-container img {
+  width: 100%; display: block; transition: filter 0.3s, transform 0.3s;
+}
+.img-container:hover img { filter: brightness(0.5); transform: scale(1.02); }
+.img-overlay {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  color: #fff; font-size: 1.2rem; font-weight: 600; opacity: 0;
+  transition: opacity 0.3s; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.img-overlay i { font-size: 2.5rem; color: var(--gold); }
+.img-container:hover .img-overlay { opacity: 1; }
+.download-btn {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+  font-size: 0.85rem; color: var(--gold); text-decoration: none;
+  background: rgba(0, 212, 177, 0.1); padding: 10px 20px; border-radius: 50px;
+  border: 1px solid rgba(0, 212, 177, 0.3); transition: all 0.3s; font-weight: 600;
+}
+.download-btn:hover { background: rgba(0, 212, 177, 0.25); color: #fff; transform: translateY(-2px); }
 </style>
 </head>
 <body>
@@ -527,8 +570,17 @@ footer .footer-leaf{color:var(--gold);font-size:1.2rem;margin:0 6px}
       <div class="callout green">
         <strong>Agricultural Connection:</strong> Every nutrient in your body originates from either a plant or an animal raised in agriculture. The health of the soil directly determines the nutritional quality of the food.
       </div>
-      <!-- IMMAGINE UNNAMED (INFOGRAFICA) -->
-      <img src="unnamed.jpg" onerror="this.src='unnamed.png'" alt="Infografica Ciclo dei Nutrienti" style="width:100%; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 24px; border: 1px solid var(--border);">
+      <!-- IMMAGINE UNNAMED (INFOGRAFICA INGRANDIBILE) -->
+      <div class="img-container" onclick="openLightbox(document.getElementById('main-infographic').src)">
+        <img id="main-infographic" src="unnamed.jpg" onerror="this.src='unnamed.png'; document.getElementById('download-infographic').href='unnamed.png'; document.getElementById('download-infographic').download='Infografica_Nutrienti.png';" alt="Infografica Ciclo dei Nutrienti">
+        <div class="img-overlay">
+          <i class="fas fa-search-plus"></i>
+          <span>Clicca per ingrandire</span>
+        </div>
+      </div>
+      <a href="unnamed.jpg" download="Infografica_Nutrienti.jpg" class="download-btn" id="download-infographic">
+        <i class="fas fa-download"></i> Scarica l'infografica in alta risoluzione
+      </a>
     </div>
   </div>
 
@@ -1558,6 +1610,12 @@ footer .footer-leaf{color:var(--gold);font-size:1.2rem;margin:0 6px}
   <p style="margin-top:6px;font-size:.75rem;color:rgba(154,144,128,.5)">Sources: FAO · WHO · UN Agenda 2030 · USDA MyPlate · EU Reg. 1169/2011 · NotebookLM Farm-to-Health Blueprint</p>
 </footer>
 
+<!-- LIGHTBOX CONTAINER -->
+<div id="image-lightbox" class="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="Ingrandimento Infografica">
+</div>
+
 <!-- ══════════════ JAVASCRIPT ══════════════ -->
 <script>
 function switchTab(tabName) {
@@ -1596,6 +1654,18 @@ document.querySelectorAll('.card, .nutrient-card, .sdg-card, .step-card, .phrase
   el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
   observer.observe(el);
 });
+
+// Funzioni per l'infografica (Lightbox)
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('image-lightbox').classList.add('active');
+}
+
+function closeLightbox(e) {
+  if(e.target.id === 'image-lightbox' || e.target.classList.contains('lightbox-close')) {
+    document.getElementById('image-lightbox').classList.remove('active');
+  }
+}
 </script>
 
 </body>
